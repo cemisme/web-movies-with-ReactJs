@@ -5,8 +5,10 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import { fetcher } from "../../apiConfig/config";
 import "swiper/scss";
 import useSWR from "swr";
+import { useNavigate } from "react-router-dom";
 const cx = classNames.bind(styles);
 const Banner = () => {
+  const navigate=useNavigate();
   const [datas, setDatas] = useState([]);
   const { data } = useSWR(
     `https://api.themoviedb.org/3/movie/now_playing?api_key=249f34542834dc9fbc4163f7865a3fab`,
@@ -39,7 +41,7 @@ const Banner = () => {
                     <span>Adventure</span>
                     <span>Drama</span>
                   </div>
-                  <div className={cx("content-infor--button")}>Watch</div>
+                  <div onClick={()=>navigate(`/movies/${data.id}`)} className={cx("content-infor--button")}>Watch</div>
                 </div>
               </div>
             </div>
