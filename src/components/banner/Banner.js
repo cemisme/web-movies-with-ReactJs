@@ -3,12 +3,14 @@ import classNames from "classnames/bind";
 import styles from "../../components/movie/index.scss";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { fetcher } from "../../apiConfig/config";
+import SwiperCore, { Autoplay } from "swiper";
 import "swiper/scss";
 import useSWR from "swr";
 import { useNavigate } from "react-router-dom";
 const cx = classNames.bind(styles);
 const Banner = () => {
-  const navigate=useNavigate();
+  SwiperCore.use([Autoplay]);
+  const navigate = useNavigate();
   const [datas, setDatas] = useState([]);
   const { data } = useSWR(
     `https://api.themoviedb.org/3/movie/now_playing?api_key=249f34542834dc9fbc4163f7865a3fab`,
@@ -19,7 +21,7 @@ const Banner = () => {
   }, [data]);
 
   return (
-    <Swiper grabCursor={"true"} spaceBetween={40}>
+    <Swiper grabCursor={"true"} spaceBetween={40} autoplay={{ delay: 2300 }}>
       {datas.map((data) => {
         return (
           <SwiperSlide key={data.id}>
@@ -41,7 +43,12 @@ const Banner = () => {
                     <span>Adventure</span>
                     <span>Drama</span>
                   </div>
-                  <div onClick={()=>navigate(`/movies/${data.id}`)} className={cx("content-infor--button")}>Watch</div>
+                  <div
+                    onClick={() => navigate(`/movies/${data.id}`)}
+                    className={cx("content-infor--button")}
+                  >
+                    Watch
+                  </div>
                 </div>
               </div>
             </div>
