@@ -1,11 +1,8 @@
 import React, { Fragment } from "react";
 import classNames from "classnames/bind";
 import styles from "./components/movie/index.scss";
-import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/scss";
-import MovieList from "./components/movie/MovieList";
 import Banner from "components/banner/Banner";
-import Header from "layout/Header";
 import HomePage from "pages/HomePage";
 import { Route, Routes } from "react-router-dom";
 import Main from "layout/Main";
@@ -30,9 +27,11 @@ const App = () => {
           ></Route>
           {/* dùng outlet để hiện thỉ các route trong route */}
           <Route path="/movies" element={<MoviePage></MoviePage>}></Route>
-        <Route path="/movies/:id" element={<MovieDetailsPage></MovieDetailsPage>}></Route>
+          <Route
+            path="/movies/:id"
+            element={<MovieDetailsPage></MovieDetailsPage>}
+          ></Route>
         </Route>
-        
       </Routes>
     </>
   );
